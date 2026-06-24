@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ustccb.lingxian.mapper.OrderMapper">
+    <resultMap id="BaseMap" type="com.ustccb.lingxian.entity.ProductOrder">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="productId" column="product_id"/>
+        <result property="quantity" column="quantity"/>
+        <result property="totalAmount" column="total_amount"/>
+        <result property="status" column="status"/>
+        <result property="createdAt" column="created_at"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.ustccb.lingxian.entity.ProductOrder" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO product_order(user_id, product_id, quantity, total_amount, status) VALUES(#{userId}, #{productId}, #{quantity}, #{totalAmount}, #{status})
+    </insert>
+    <select id="findById" resultMap="BaseMap">SELECT * FROM product_order WHERE id = #{id}</select>
+    <select id="findByUser" resultMap="BaseMap">SELECT * FROM product_order WHERE user_id = #{userId} ORDER BY created_at DESC</select>
+    <update id="updateStatus">UPDATE product_order SET status = #{status} WHERE id = #{id}</update>
+</mapper>

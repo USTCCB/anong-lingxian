@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ustccb.lingxian.mapper.ProductMapper">
+    <resultMap id="BaseMap" type="com.ustccb.lingxian.entity.Product">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="price" column="price"/>
+        <result property="stock" column="stock"/>
+        <result property="category" column="category"/>
+        <result property="imageUrl" column="image_url"/>
+    </resultMap>
+    <select id="findAll" resultMap="BaseMap">SELECT * FROM product ORDER BY id</select>
+    <select id="findById" resultMap="BaseMap">SELECT * FROM product WHERE id = #{id}</select>
+    <update id="decreaseStock">UPDATE product SET stock = stock - #{qty} WHERE id = #{id} AND stock >= #{qty}</update>
+</mapper>
